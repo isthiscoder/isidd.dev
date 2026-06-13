@@ -81,7 +81,10 @@
     margin: 0; padding: 0;
     align-items: center;
     height: var(--header-height);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
+  #menu::-webkit-scrollbar { display: none; height: 0; width: 0; }
   #menu li { margin: 0; display: flex; align-items: center; height: 100%; }
   #menu a {
     font-size: 16px;
