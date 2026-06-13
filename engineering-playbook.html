@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engineering Playbook — Siddharth Singh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root[data-theme="light"] {
+    --bg:        #FAFAF8;
+    --bg2:       #F2F1EC;
+    --bg3:       #E8E6E0;
+    --ink:       #1A1A18;
+    --ink2:      #4A4A45;
+    --ink3:      #8A8A82;
+    --border:    #E8E6E0;
+    --border2:   #D5D2CA;
+    --pill-bg:   rgba(0,0,0,0.04);
+    --pill-hover:rgba(0,0,0,0.07);
+  }
+  :root[data-theme="dark"] {
+    --bg:        #1A1A18;
+    --bg2:       #232321;
+    --bg3:       #2A2A27;
+    --ink:       #ECEAE3;
+    --ink2:      #B5B2A9;
+    --ink3:      #6A6862;
+    --border:    rgba(255,255,255,0.08);
+    --border2:   rgba(255,255,255,0.14);
+    --pill-bg:   rgba(255,255,255,0.06);
+    --pill-hover:rgba(255,255,255,0.10);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.7;
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── TOPBAR ── */
+  .topbar {
+    width: 100%;
+    padding: 20px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+  .back {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--ink3);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    transition: color 0.2s;
+  }
+  .back:hover { color: var(--ink); }
+
+  .theme-btn {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border2);
+    background: transparent;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink3);
+    transition: all 0.2s;
+  }
+  .theme-btn:hover { color: var(--ink); background: var(--pill-bg); }
+  .theme-btn svg { width: 14px; height: 14px; }
+
+  /* ── LAYOUT ── */
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 72px 32px 140px;
+  }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    margin-bottom: 64px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .page-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 14px;
+  }
+
+  .page-title {
+    font-family: 'Source Serif 4', serif;
+    font-size: clamp(30px, 5vw, 38px);
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .page-desc {
+    font-family: 'Source Serif 4', serif;
+    font-size: 17px;
+    color: var(--ink2);
+    line-height: 1.7;
+    max-width: 580px;
+  }
+
+  /* ── ENTRIES ── */
+  .play-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .play-item {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+  .play-item:first-child { border-top: 1px solid var(--border); }
+  .play-item:hover .play-title { color: var(--ink); }
+  .play-item:hover .play-arrow { opacity: 1; transform: translateX(3px); }
+
+  .play-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink3);
+    flex-shrink: 0;
+    min-width: 28px;
+    letter-spacing: 0.04em;
+  }
+
+  .play-title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ink);
+    transition: color 0.15s;
+    line-height: 1.45;
+    flex: 1;
+  }
+
+  .play-meta {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--ink3);
+    margin-left: auto;
+    flex-shrink: 0;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+  }
+
+  .play-arrow {
+    display: inline-block;
+    color: var(--ink3);
+    opacity: 0;
+    transition: opacity 0.15s, transform 0.18s;
+    margin-left: 6px;
+    font-weight: 400;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 580px) {
+    .topbar { padding: 16px 20px; }
+    main { padding: 40px 22px 80px; }
+    .play-meta { display: none; }
+    .play-title { font-size: 16px; }
+    body { font-size: 16px; }
+  }
+
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="back">← Siddharth Singh</a>
+  <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+    <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg id="iconSun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  </button>
+</div>
+
+<main>
+
+  <div class="page-header">
+    <p class="page-label">Engineering Playbook</p>
+    <h1 class="page-title">Every entry, all the way back</h1>
+    <p class="page-desc">The full collection of engineering notes — across inference, retrieval, training, systems, and reliability. Newest at the top.</p>
+  </div>
+
+  <!-- ═══ Add new entries to the top of this list ═══ -->
+
+  <div class="play-list">
+
+    <a href="#" class="play-item">
+      <span class="play-num">06</span>
+      <span class="play-title">Evaluating Agent Reliability in Multi-Step Tasks<span class="play-arrow">→</span></span>
+      <span class="play-meta">Agents · Evals</span>
+    </a>
+
+    <a href="#" class="play-item">
+      <span class="play-num">05</span>
+      <span class="play-title">GPU Memory Optimization for LLM Serving<span class="play-arrow">→</span></span>
+      <span class="play-meta">CUDA · KV Cache</span>
+    </a>
+
+    <a href="#" class="play-item">
+      <span class="play-num">04</span>
+      <span class="play-title">From LoRA to Full Fine-Tune: When and Why<span class="play-arrow">→</span></span>
+      <span class="play-meta">PEFT · Training</span>
+    </a>
+
+    <a href="#" class="play-item">
+      <span class="play-num">03</span>
+      <span class="play-title">Prompt Engineering Patterns I Actually Use<span class="play-arrow">→</span></span>
+      <span class="play-meta">Prompting · CoT</span>
+    </a>
+
+    <a href="#" class="play-item">
+      <span class="play-num">02</span>
+      <span class="play-title">Designing Production RAG Systems That Don't Break<span class="play-arrow">→</span></span>
+      <span class="play-meta">RAG · Reliability</span>
+    </a>
+
+    <a href="#" class="play-item">
+      <span class="play-num">01</span>
+      <span class="play-title">Efficient Attention: FlashAttention to Multi-Query<span class="play-arrow">→</span></span>
+      <span class="play-meta">Memory · Transformers</span>
+    </a>
+
+  </div>
+
+</main>
+
+<script>
+  const btn = document.getElementById('themeBtn');
+  const moon = document.getElementById('iconMoon');
+  const sun = document.getElementById('iconSun');
+  const html = document.documentElement;
+
+  const saved = localStorage.getItem('ss-theme') || 'light';
+  applyTheme(saved);
+
+  btn.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    applyTheme(next);
+    localStorage.setItem('ss-theme', next);
+  });
+
+  function applyTheme(t) {
+    html.setAttribute('data-theme', t);
+    moon.style.display = t === 'light' ? 'block' : 'none';
+    sun.style.display  = t === 'light' ? 'none'  : 'block';
+  }
+</script>
+</body>
+</html>
