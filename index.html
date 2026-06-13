@@ -55,7 +55,7 @@
 
   .nav {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
     max-width: calc(var(--nav-width) + var(--gap) * 2);
@@ -69,6 +69,7 @@
     font-size: 24px;
     font-weight: 700;
     color: var(--primary);
+    white-space: nowrap;
   }
 
   #menu {
@@ -257,6 +258,7 @@
 
   @media (max-width: 768px) {
     .nav { padding: 0 16px; line-height: 48px; }
+    .logo { flex-shrink: 0; }
     header { margin-bottom: 4px; }
     .logo a { font-size: 19px; }
     #menu a { font-size: 13.5px; padding: 0 6px; }
