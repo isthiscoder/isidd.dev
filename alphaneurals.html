@@ -178,6 +178,29 @@
   }
 
   /* ── SECTION ── */
+  .sec-card-link { display: block; text-decoration: none; color: inherit; }
+  .sec-card-link .sec-card { transition: border-color 0.15s, box-shadow 0.15s; }
+  .sec-card-link:hover .sec-card {
+    border-color: var(--tertiary);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .sec-card-link:hover .logs-link { color: var(--primary); }
+  .sec-card-link:hover .arrow { transform: translateX(3px); }
+
+  .logs-row {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+  }
+  .logs-link {
+    font-size: 13px;
+    color: var(--secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.15s;
+  }
+  .logs-link .arrow { display: inline-block; transition: transform 0.15s; }
   .sec { margin-bottom: 20px; }
 
   .sec-label {
@@ -332,18 +355,14 @@
   <!-- ══ ARCHITECTURE ══ -->
   <section class="sec">
     <h2 class="sec-label">Architecture</h2>
+<a href="architecture-log.html" class="sec-card-link">
+  <div class="sec-card">
+    <p class="sec-current">Write the current Architecture here — four or more lines on how the system is structured. The Core (memory, context, retrieval) and the layers that sit on it: Myelin (storage intelligence), Learn (cognitive evolution), Arena (performance intelligence). Replace this with your own words describing how the pieces connect.</p>
     <div class="logs-row">
-  <a href="architecture-log.html" class="logs-link">Past logs <span class="arrow">→</span></a>
-</div>
-    <div class="sec-card">
-      <p class="sec-current">Write the current Architecture here — four or more lines on how the system is structured. The Core (memory, context, retrieval) and the layers that sit on it: Myelin (storage intelligence), Learn (cognitive evolution), Arena (performance intelligence). Replace this with your own words describing how the pieces connect.</p>
-      <div class="sec-history">
-        <div class="history-item">
-          <p class="history-date">Earlier · May 2025</p>
-          <p class="history-text">An earlier version of the Architecture will appear here once updated — showing how the structure evolved over time.</p>
-        </div>
-      </div>
+      <span class="logs-link">Past logs <span class="arrow">→</span></span>
     </div>
+  </div>
+</a>
   </section>
 
   <hr class="divider">
