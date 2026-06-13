@@ -333,6 +333,23 @@
     flex-shrink: 0;
     white-space: nowrap;
   }
+  .see-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--ink2);
+    text-decoration: none;
+    margin-top: 22px;
+    padding: 4px 0;
+    transition: color 0.15s;
+    letter-spacing: 0.01em;
+  }
+  .see-all:hover { color: var(--ink); }
+  .see-all:hover .see-all-arrow { transform: translateX(3px); }
+  .see-all-arrow { transition: transform 0.18s; display: inline-block; }
 
   /* ── ARCH GRID ── */
   .arch-grid {
@@ -608,6 +625,7 @@
         <span class="play-meta">Agents · Evals</span>
       </a>
     </div>
+    <a href="engineering-playbook.html" class="see-all">See all entries <span class="see-all-arrow">→</span></a>
   </section>
 
   <div class="divider"></div>
