@@ -18,7 +18,6 @@
     --border:    #E8E6E0;
     --border2:   #D5D2CA;
     --pill-bg:   rgba(0,0,0,0.04);
-    --pill-hover:rgba(0,0,0,0.07);
   }
   :root[data-theme="dark"] {
     --bg:        #1A1A18;
@@ -30,11 +29,9 @@
     --border:    rgba(255,255,255,0.08);
     --border2:   rgba(255,255,255,0.14);
     --pill-bg:   rgba(255,255,255,0.06);
-    --pill-hover:rgba(255,255,255,0.10);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
 
   body {
     background: var(--bg);
@@ -81,46 +78,10 @@
   .theme-btn:hover { color: var(--ink); background: var(--pill-bg); }
   .theme-btn svg { width: 14px; height: 14px; }
 
-  /* ── LAYOUT ── */
   main {
     max-width: 800px;
     margin: 0 auto;
     padding: 72px 32px 140px;
-  }
-
-  /* ── PAGE HEADER ── */
-  .page-header {
-    margin-bottom: 64px;
-    padding-bottom: 32px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .page-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink3);
-    margin-bottom: 14px;
-  }
-
-  .page-title {
-    font-family: 'Source Serif 4', serif;
-    font-size: clamp(30px, 5vw, 38px);
-    font-weight: 600;
-    color: var(--ink);
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    margin-bottom: 16px;
-  }
-
-  .page-desc {
-    font-family: 'Source Serif 4', serif;
-    font-size: 17px;
-    color: var(--ink2);
-    line-height: 1.7;
-    max-width: 580px;
   }
 
   /* ── ENTRIES ── */
@@ -141,16 +102,6 @@
   .play-item:first-child { border-top: 1px solid var(--border); }
   .play-item:hover .play-title { color: var(--ink); }
   .play-item:hover .play-arrow { opacity: 1; transform: translateX(3px); }
-
-  .play-num {
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--ink3);
-    flex-shrink: 0;
-    min-width: 28px;
-    letter-spacing: 0.04em;
-  }
 
   .play-title {
     font-family: 'Source Serif 4', serif;
@@ -181,7 +132,6 @@
     font-weight: 400;
   }
 
-  /* ── MOBILE ── */
   @media (max-width: 580px) {
     .topbar { padding: 16px 20px; }
     main { padding: 40px 22px 80px; }
@@ -206,48 +156,36 @@
 
 <main>
 
-  <div class="page-header">
-    <p class="page-label">Engineering Playbook</p>
-    <h1 class="page-title">Every entry, all the way back</h1>
-    <p class="page-desc">The full collection of engineering notes — across inference, retrieval, training, systems, and reliability. Newest at the top.</p>
-  </div>
-
-  <!-- ═══ Add new entries to the top of this list ═══ -->
-
   <div class="play-list">
 
+    <!-- ═══ NEW ENTRY GOES HERE — paste the block right below this line ═══ -->
+
     <a href="#" class="play-item">
-      <span class="play-num">06</span>
       <span class="play-title">Evaluating Agent Reliability in Multi-Step Tasks<span class="play-arrow">→</span></span>
       <span class="play-meta">Agents · Evals</span>
     </a>
 
     <a href="#" class="play-item">
-      <span class="play-num">05</span>
       <span class="play-title">GPU Memory Optimization for LLM Serving<span class="play-arrow">→</span></span>
       <span class="play-meta">CUDA · KV Cache</span>
     </a>
 
     <a href="#" class="play-item">
-      <span class="play-num">04</span>
       <span class="play-title">From LoRA to Full Fine-Tune: When and Why<span class="play-arrow">→</span></span>
       <span class="play-meta">PEFT · Training</span>
     </a>
 
     <a href="#" class="play-item">
-      <span class="play-num">03</span>
       <span class="play-title">Prompt Engineering Patterns I Actually Use<span class="play-arrow">→</span></span>
       <span class="play-meta">Prompting · CoT</span>
     </a>
 
     <a href="#" class="play-item">
-      <span class="play-num">02</span>
       <span class="play-title">Designing Production RAG Systems That Don't Break<span class="play-arrow">→</span></span>
       <span class="play-meta">RAG · Reliability</span>
     </a>
 
-    <a href="#" class="play-item">
-      <span class="play-num">01</span>
+    <a href="playbook/flashattention.html" class="play-item">
       <span class="play-title">Efficient Attention: FlashAttention to Multi-Query<span class="play-arrow">→</span></span>
       <span class="play-meta">Memory · Transformers</span>
     </a>
