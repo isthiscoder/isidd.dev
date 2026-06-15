@@ -1,200 +1,236 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" dir="auto" data-theme="light">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Engineering Playbook — Siddharth Singh</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --gap: 24px;
+    --nav-width: 1024px;
+    --main-width: 720px;
+    --header-height: 60px;
+    --footer-height: 60px;
+    --radius: 8px;
+  }
   :root[data-theme="light"] {
-    --bg:        #FAFAF8;
-    --bg2:       #F2F1EC;
-    --bg3:       #E8E6E0;
-    --ink:       #1A1A18;
-    --ink2:      #4A4A45;
-    --ink3:      #8A8A82;
-    --border:    #E8E6E0;
-    --border2:   #D5D2CA;
-    --pill-bg:   rgba(0,0,0,0.04);
+    --theme: #ffffff;
+    --entry: #ffffff;
+    --primary: rgb(30, 30, 30);
+    --secondary: rgb(108, 108, 108);
+    --tertiary: rgb(214, 214, 214);
+    --content: rgb(31, 31, 31);
+    --code-bg: rgb(245, 245, 245);
+    --border: rgb(238, 238, 238);
   }
   :root[data-theme="dark"] {
-    --bg:        #1A1A18;
-    --bg2:       #232321;
-    --bg3:       #2A2A27;
-    --ink:       #ECEAE3;
-    --ink2:      #B5B2A9;
-    --ink3:      #6A6862;
-    --border:    rgba(255,255,255,0.08);
-    --border2:   rgba(255,255,255,0.14);
-    --pill-bg:   rgba(255,255,255,0.06);
+    --theme: rgb(29, 30, 32);
+    --entry: rgb(46, 46, 51);
+    --primary: rgb(218, 218, 219);
+    --secondary: rgb(155, 156, 157);
+    --tertiary: rgb(65, 66, 68);
+    --content: rgb(196, 196, 197);
+    --code-bg: rgb(55, 56, 62);
+    --border: rgb(51, 51, 51);
   }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
+  a { text-decoration: none; }
 
   body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 17px;
-    line-height: 1.7;
-    min-height: 100vh;
-    transition: background 0.3s, color 0.3s;
-    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    word-break: break-word;
+    background: var(--theme);
+    color: var(--primary);
+    transition: background 0.2s, color 0.2s;
   }
 
-  /* ── TOPBAR ── */
-  .topbar {
-    width: 100%;
-    padding: 20px 36px;
+  .nav {
     display: flex;
-    align-items: center;
+    flex-wrap: nowrap;
     justify-content: space-between;
-    border-bottom: 1px solid var(--border);
+    align-items: center;
+    max-width: calc(var(--nav-width) + var(--gap) * 2);
+    margin-inline: auto;
+    line-height: var(--header-height);
+    padding: 0 var(--gap);
   }
+  header { margin-bottom: var(--gap); }
+
   .back {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    color: var(--ink3);
-    text-decoration: none;
+    font-size: 14px;
+    color: var(--secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s;
+    white-space: nowrap;
+  }
+  .back:hover { color: var(--primary); }
+
+  .theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 10px;
     display: flex;
     align-items: center;
-    gap: 7px;
-    transition: color 0.2s;
+    justify-content: center;
+    height: var(--header-height);
+    line-height: 1;
+    color: var(--primary);
   }
-  .back:hover { color: var(--ink); }
+  .theme-toggle svg { height: 18px; width: 18px; fill: currentColor; display: block; }
 
-  .theme-btn {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    border: 1px solid var(--border2);
-    background: transparent;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--ink3);
-    transition: all 0.2s;
-  }
-  .theme-btn:hover { color: var(--ink); background: var(--pill-bg); }
-  .theme-btn svg { width: 14px; height: 14px; }
-
-  main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 72px 32px 140px;
+  main.main {
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+    margin-inline: auto;
+    padding: 0 var(--gap);
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
   }
 
-  /* ── ENTRIES ── */
- .page-title {
-    font-family: 'Source Serif 4', serif;
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--ink);
+  /* ── PAGE HEADER ── */
+  .page-header {
+    padding: 16px 0 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+  .page-title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 32px;
+    font-weight: 700;
     letter-spacing: -0.02em;
-    line-height: 1.15;
-    margin-bottom: 40px;
-  } 
-  .play-list {
-    display: flex;
-    flex-direction: column;
+    line-height: 1.1;
+    color: var(--primary);
+    margin: 0 0 8px;
   }
+  .page-desc {
+    font-size: 14.5px;
+    color: var(--secondary);
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* ── PLAYBOOK LIST ── */
+  .play-list { display: flex; flex-direction: column; }
 
   .play-item {
     display: flex;
     align-items: baseline;
     gap: 18px;
-    padding: 22px 0;
+    padding: 18px 0;
     border-bottom: 1px solid var(--border);
-    text-decoration: none;
     transition: all 0.15s;
   }
-  .play-item:first-child { border-top: 1px solid var(--border); }
-  .play-item:hover .play-title { color: var(--ink); }
+  .play-item:hover .play-title { color: var(--secondary); }
   .play-item:hover .play-arrow { opacity: 1; transform: translateX(3px); }
 
   .play-title {
-    font-family: 'Source Serif 4', serif;
-    font-size: 17px;
-    font-weight: 500;
-    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--primary);
+    line-height: 1.4;
     transition: color 0.15s;
-    line-height: 1.45;
     flex: 1;
   }
-
-  .play-meta {
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    color: var(--ink3);
-    margin-left: auto;
-    flex-shrink: 0;
-    white-space: nowrap;
-    letter-spacing: 0.01em;
-  }
-
   .play-arrow {
     display: inline-block;
-    color: var(--ink3);
+    color: var(--secondary);
     opacity: 0;
     transition: opacity 0.15s, transform 0.18s;
     margin-left: 6px;
-    font-weight: 400;
+  }
+  .play-meta {
+    font-size: 13px;
+    color: var(--secondary);
+    margin-left: auto;
+    flex-shrink: 0;
+    white-space: nowrap;
   }
 
-  @media (max-width: 580px) {
-    .topbar { padding: 16px 20px; }
-    main { padding: 40px 22px 80px; }
+  footer.footer {
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+    margin-inline: auto;
+    padding: 24px var(--gap);
+    font-size: 13px;
+    color: var(--secondary);
+    text-align: center;
+  }
+  footer.footer a { color: var(--secondary); border-bottom: 1px solid var(--tertiary); }
+  footer.footer a:hover { color: var(--primary); }
+
+  @media (max-width: 768px) {
+    .nav { padding: 0 16px; line-height: 48px; }
+    .theme-toggle { height: 48px; }
+    .back { font-size: 13px; }
+    main.main { padding: 0 16px; }
+    .page-header { padding: 12px 0 14px; }
+    .page-title { font-size: 26px; }
+    .page-desc { font-size: 13.5px; }
+    .play-item { padding: 15px 0; gap: 12px; }
+    .play-title { font-size: 17px; }
     .play-meta { display: none; }
-    .play-title { font-size: 16px; }
     body { font-size: 16px; }
   }
-
-  ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <a href="index.html" class="back">← Siddharth Singh</a>
-  <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
-    <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    <svg id="iconSun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-  </button>
-</div>
+<header>
+  <nav class="nav">
+    <a href="index.html" class="back">← Siddharth Singh</a>
+    <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme">
+      <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg id="iconSun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </nav>
+</header>
 
-<main>
-<h1 class="page-title">Engineering Playbook</h1>
+<main class="main">
+
+  <div class="page-header">
+    <h1 class="page-title">Engineering Playbook</h1>
+    <p class="page-desc">Long-form engineering notes — each one a deep write-up. Newest first.</p>
+  </div>
+
   <div class="play-list">
 
-    <!-- ═══ NEW ENTRY GOES HERE — paste the block right below this line ═══ -->
+    <!-- ═══ NEWEST ENTRY GOES AT THE TOP — copy a block and paste it right below this line ═══ -->
 
-    <a href="#" class="play-item">
+    <a href="playbook-agent-reliability.html" class="play-item">
       <span class="play-title">Evaluating Agent Reliability in Multi-Step Tasks<span class="play-arrow">→</span></span>
       <span class="play-meta">Agents · Evals</span>
     </a>
 
-    <a href="#" class="play-item">
+    <a href="playbook-gpu-memory.html" class="play-item">
       <span class="play-title">GPU Memory Optimization for LLM Serving<span class="play-arrow">→</span></span>
       <span class="play-meta">CUDA · KV Cache</span>
     </a>
 
-    <a href="#" class="play-item">
+    <a href="playbook-lora-finetune.html" class="play-item">
       <span class="play-title">From LoRA to Full Fine-Tune: When and Why<span class="play-arrow">→</span></span>
       <span class="play-meta">PEFT · Training</span>
     </a>
 
-    <a href="#" class="play-item">
+    <a href="playbook-prompt-engineering.html" class="play-item">
       <span class="play-title">Prompt Engineering Patterns I Actually Use<span class="play-arrow">→</span></span>
       <span class="play-meta">Prompting · CoT</span>
     </a>
 
-    <a href="#" class="play-item">
+    <a href="playbook-rag-systems.html" class="play-item">
       <span class="play-title">Designing Production RAG Systems That Don't Break<span class="play-arrow">→</span></span>
       <span class="play-meta">RAG · Reliability</span>
     </a>
 
-    <a href="playbook/flashattention.html" class="play-item">
+    <a href="playbook-flashattention.html" class="play-item">
       <span class="play-title">Efficient Attention: FlashAttention to Multi-Query<span class="play-arrow">→</span></span>
       <span class="play-meta">Memory · Transformers</span>
     </a>
@@ -203,25 +239,26 @@
 
 </main>
 
+<footer class="footer">
+  © 2026 <a href="index.html">isidd.dev</a> · Siddharth Singh · <a href="https://bitslyf.com" target="_blank">Engineering &amp; Lab</a>
+</footer>
+
 <script>
   const btn = document.getElementById('themeBtn');
   const moon = document.getElementById('iconMoon');
   const sun = document.getElementById('iconSun');
   const html = document.documentElement;
-
   const saved = localStorage.getItem('ss-theme') || 'light';
   applyTheme(saved);
-
   btn.addEventListener('click', () => {
     const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     applyTheme(next);
     localStorage.setItem('ss-theme', next);
   });
-
   function applyTheme(t) {
     html.setAttribute('data-theme', t);
-    moon.style.display = t === 'light' ? 'block' : 'none';
-    sun.style.display  = t === 'light' ? 'none'  : 'block';
+    moon.style.display = t === 'light' ? 'inline' : 'none';
+    sun.style.display  = t === 'light' ? 'none'  : 'inline';
   }
 </script>
 </body>
