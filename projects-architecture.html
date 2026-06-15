@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Projects Architecture — Siddharth Singh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gap: 24px;
+    --nav-width: 1024px;
+    --main-width: 720px;
+    --header-height: 60px;
+    --footer-height: 60px;
+    --radius: 8px;
+  }
+  :root[data-theme="light"] {
+    --theme: #ffffff;
+    --entry: #ffffff;
+    --primary: rgb(30, 30, 30);
+    --secondary: rgb(108, 108, 108);
+    --tertiary: rgb(214, 214, 214);
+    --content: rgb(31, 31, 31);
+    --code-bg: rgb(245, 245, 245);
+    --border: rgb(238, 238, 238);
+  }
+  :root[data-theme="dark"] {
+    --theme: rgb(29, 30, 32);
+    --entry: rgb(46, 46, 51);
+    --primary: rgb(218, 218, 219);
+    --secondary: rgb(155, 156, 157);
+    --tertiary: rgb(65, 66, 68);
+    --content: rgb(196, 196, 197);
+    --code-bg: rgb(55, 56, 62);
+    --border: rgb(51, 51, 51);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
+  a { text-decoration: none; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    word-break: break-word;
+    background: var(--theme);
+    color: var(--primary);
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    max-width: calc(var(--nav-width) + var(--gap) * 2);
+    margin-inline: auto;
+    line-height: var(--header-height);
+    padding: 0 var(--gap);
+  }
+  header { margin-bottom: var(--gap); }
+
+  .back {
+    font-size: 14px;
+    color: var(--secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s;
+    white-space: nowrap;
+  }
+  .back:hover { color: var(--primary); }
+
+  .theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--header-height);
+    line-height: 1;
+    color: var(--primary);
+  }
+  .theme-toggle svg { height: 18px; width: 18px; fill: currentColor; display: block; }
+
+  main.main {
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+    margin-inline: auto;
+    padding: 0 var(--gap);
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
+  }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    padding: 16px 0 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+  .page-title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--primary);
+    margin: 0 0 8px;
+  }
+  .page-desc {
+    font-size: 14.5px;
+    color: var(--secondary);
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* ── PLAYBOOK LIST ── */
+  .play-list { display: flex; flex-direction: column; }
+
+  .play-item {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+    transition: all 0.15s;
+  }
+  .play-item:hover .play-title { color: var(--secondary); }
+  .play-item:hover .play-arrow { opacity: 1; transform: translateX(3px); }
+
+  .play-title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--primary);
+    line-height: 1.4;
+    transition: color 0.15s;
+    flex: 1;
+  }
+  .play-arrow {
+    display: inline-block;
+    color: var(--secondary);
+    opacity: 0;
+    transition: opacity 0.15s, transform 0.18s;
+    margin-left: 6px;
+  }
+  .play-meta {
+    font-size: 13px;
+    color: var(--secondary);
+    margin-left: auto;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  footer.footer {
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+    margin-inline: auto;
+    padding: 24px var(--gap);
+    font-size: 13px;
+    color: var(--secondary);
+    text-align: center;
+  }
+  footer.footer a { color: var(--secondary); border-bottom: 1px solid var(--tertiary); }
+  footer.footer a:hover { color: var(--primary); }
+
+  @media (max-width: 768px) {
+    .nav { padding: 0 16px; line-height: 48px; }
+    .theme-toggle { height: 48px; }
+    .back { font-size: 13px; }
+    main.main { padding: 0 16px; }
+    .page-header { padding: 12px 0 14px; }
+    .page-title { font-size: 26px; }
+    .page-desc { font-size: 13.5px; }
+    .play-item { padding: 15px 0; gap: 12px; }
+    .play-title { font-size: 17px; }
+    .play-meta { display: none; }
+    body { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="index.html" class="back">← Siddharth Singh</a>
+    <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme">
+      <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg id="iconSun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main class="main">
+
+  <div class="page-header">
+    <h1 class="page-title">Projects Architecture</h1>
+    <p class="page-desc">How each system is structured underneath — one deep write-up per component. Newest first.</p>
+  </div>
+
+  <div class="play-list">
+
+    <!-- ═══ NEWEST ENTRY GOES AT THE TOP — copy a block and paste it right below this line ═══ -->
+
+    <a href="architecture-core.html" class="play-item">
+      <span class="play-title">Alphaneurals Core — Memory &amp; Retrieval Layer<span class="play-arrow">→</span></span>
+      <span class="play-meta">Core · Memory</span>
+    </a>
+
+    <a href="architecture-myelin.html" class="play-item">
+      <span class="play-title">Myelin — Storage Intelligence Layer<span class="play-arrow">→</span></span>
+      <span class="play-meta">Myelin · Storage</span>
+    </a>
+
+    <a href="architecture-learn.html" class="play-item">
+      <span class="play-title">Learn — Cognitive Evolution Layer<span class="play-arrow">→</span></span>
+      <span class="play-meta">Learn · Cognition</span>
+    </a>
+
+    <a href="architecture-arena.html" class="play-item">
+      <span class="play-title">Arena — Performance Intelligence Layer<span class="play-arrow">→</span></span>
+      <span class="play-meta">Arena · Performance</span>
+    </a>
+
+    <a href="architecture-retrieval.html" class="play-item">
+      <span class="play-title">Retrieval Pipeline — Chunking, Search, Reranking<span class="play-arrow">→</span></span>
+      <span class="play-meta">Retrieval · Pipeline</span>
+    </a>
+
+    <a href="architecture-knowledge-graph.html" class="play-item">
+      <span class="play-title">Knowledge Graph — Modeling Connections Over Time<span class="play-arrow">→</span></span>
+      <span class="play-meta">Graph · Modeling</span>
+    </a>
+
+  </div>
+
+</main>
+
+<footer class="footer">
+  © 2026 <a href="index.html">isidd.dev</a> · Siddharth Singh · <a href="https://bitslyf.com" target="_blank">Engineering &amp; Lab</a>
+</footer>
+
+<script>
+  const btn = document.getElementById('themeBtn');
+  const moon = document.getElementById('iconMoon');
+  const sun = document.getElementById('iconSun');
+  const html = document.documentElement;
+  const saved = localStorage.getItem('ss-theme') || 'light';
+  applyTheme(saved);
+  btn.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    applyTheme(next);
+    localStorage.setItem('ss-theme', next);
+  });
+  function applyTheme(t) {
+    html.setAttribute('data-theme', t);
+    moon.style.display = t === 'light' ? 'inline' : 'none';
+    sun.style.display  = t === 'light' ? 'none'  : 'inline';
+  }
+</script>
+</body>
+</html>
