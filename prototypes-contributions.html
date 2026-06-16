@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Prototypes | Contributions — Siddharth Singh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gap: 24px;
+    --nav-width: 1024px;
+    --main-width: 720px;
+    --header-height: 60px;
+    --footer-height: 60px;
+    --radius: 8px;
+  }
+  :root[data-theme="light"] {
+    --theme: #ffffff;
+    --entry: #ffffff;
+    --primary: rgb(30, 30, 30);
+    --secondary: rgb(108, 108, 108);
+    --tertiary: rgb(214, 214, 214);
+    --content: rgb(31, 31, 31);
+    --code-bg: rgb(245, 245, 245);
+    --border: rgb(238, 238, 238);
+    --tag-bg: rgb(243, 243, 243);
+  }
+  :root[data-theme="dark"] {
+    --theme: rgb(29, 30, 32);
+    --entry: rgb(46, 46, 51);
+    --primary: rgb(218, 218, 219);
+    --secondary: rgb(155, 156, 157);
+    --tertiary: rgb(65, 66, 68);
+    --content: rgb(196, 196, 197);
+    --code-bg: rgb(55, 56, 62);
+    --border: rgb(51, 51, 51);
+    --tag-bg: rgb(46, 46, 51);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
+  a { text-decoration: none; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    word-break: break-word;
+    background: var(--theme);
+    color: var(--primary);
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    max-width: calc(var(--nav-width) + var(--gap) * 2);
+    margin-inline: auto;
+    line-height: var(--header-height);
+    padding: 0 var(--gap);
+  }
+  header { margin-bottom: 16px; }
+
+  .back {
+    font-size: 14px;
+    color: var(--secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s;
+    white-space: nowrap;
+  }
+  .back:hover { color: var(--primary); }
+
+  .theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--header-height);
+    line-height: 1;
+    color: var(--primary);
+  }
+  .theme-toggle svg { height: 18px; width: 18px; fill: currentColor; display: block; }
+
+  main.main {
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+    margin-inline: auto;
+    padding: 0 var(--gap);
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
+  }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    padding: 12px 0 16px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 22px;
+  }
+  .page-title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+    color: var(--primary);
+    margin: 0 0 8px;
+  }
+  .page-desc {
+    font-size: 14.5px;
+    color: var(--secondary);
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* ── LIST ── */
+  .proto-list { display: flex; flex-direction: column; gap: 16px; padding-bottom: 110px; }
+
+  .proto {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .proto:hover {
+    border-color: var(--tertiary);
+    box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+  }
+
+  /* demo visual (hero, for prototypes) */
+  .proto-visual {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: var(--code-bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .proto-visual-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--code-bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+
+  .proto-body { padding: 16px 22px 18px; }
+
+  .proto-title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.3;
+    margin: 0 0 7px;
+  }
+  .proto-text {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--content);
+    margin: 0 0 10px;
+  }
+  .proto-text strong { color: var(--primary); font-weight: 600; }
+
+  .proto-status {
+    font-size: 13px;
+    color: var(--secondary);
+    margin: 0 0 14px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* links row */
+  .proto-links {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .proto-link {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: gap 0.15s;
+  }
+  .proto-link svg { width: 14px; height: 14px; fill: currentColor; }
+  .proto-link .arr { transition: transform 0.15s; }
+  .proto-link:hover .arr { transform: translateX(3px); }
+  .proto-link:hover { color: var(--secondary); }
+
+  /* footer meta */
+  .proto-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .proto-date { font-size: 13px; color: var(--secondary); }
+  .proto-sep { color: var(--tertiary); font-size: 13px; }
+  .proto-tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    padding: 2px 10px;
+    border-radius: 5px;
+  }
+
+  footer.footer {
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+    margin-inline: auto;
+    padding: 24px var(--gap);
+    font-size: 13px;
+    color: var(--secondary);
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  footer.footer a { color: var(--secondary); border-bottom: 1px solid var(--tertiary); }
+  footer.footer a:hover { color: var(--primary); }
+
+  @media (max-width: 768px) {
+    .nav { padding: 0 16px; line-height: 48px; }
+    .theme-toggle { height: 48px; }
+    .back { font-size: 13px; }
+    main.main { padding: 0 16px; }
+    .page-header { padding: 10px 0 12px; margin-bottom: 18px; }
+    .page-title { font-size: 25px; }
+    .page-desc { font-size: 13.5px; }
+    .proto-list { gap: 12px; }
+    .proto-body { padding: 14px 16px 16px; }
+    .proto-title { font-size: 18px; }
+    .proto-text { font-size: 15px; }
+    .proto-links { gap: 14px; }
+    body { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="index.html" class="back">← Siddharth Singh</a>
+    <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme">
+      <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg id="iconSun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main class="main">
+
+  <div class="page-header">
+    <h1 class="page-title">Prototypes | Contributions</h1>
+    <p class="page-desc">Real, working things — what I've built and what I've contributed to. Newest first.</p>
+  </div>
+
+  <div class="proto-list">
+
+    <!-- ═══ NEWEST ENTRY GOES AT THE TOP — copy a block and paste it right below this line ═══ -->
+
+    <!-- ───── PROTOTYPE CARD (your own build, with demo) ───── -->
+    <div class="proto">
+      <!-- Replace the placeholder div with: <img class="proto-visual" src="your-demo.gif" alt="Demo"> -->
+      <div class="proto-visual-placeholder">demo / screenshot goes here</div>
+      <div class="proto-body">
+        <h2 class="proto-title">Myelin v1.0 — Storage Intelligence Layer</h2>
+        <p class="proto-text">A short description of what this prototype does and what's working in v1.0. Replace with your own words — keep it concrete so a reader understands what they're looking at.</p>
+        <p class="proto-status">v1.0 · core working · next: eval harness</p>
+        <div class="proto-links">
+          <a href="#" class="proto-link" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M10 6v2H5v11h11v-5h2v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6zm11-3v8h-2V6.41l-7.29 7.3-1.42-1.42L17.59 5H13V3h8z"/></svg>
+            Live Demo <span class="arr">→</span>
+          </a>
+          <a href="#" class="proto-link" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            GitHub <span class="arr">→</span>
+          </a>
+        </div>
+        <div class="proto-footer">
+          <span class="proto-date">June 2025</span>
+          <span class="proto-sep">|</span>
+          <span class="proto-tag">Prototype</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ───── CONTRIBUTION CARD (PR to someone else's project, no big visual) ───── -->
+    <div class="proto">
+      <div class="proto-body">
+        <h2 class="proto-title">Fixed a retrieval edge-case in [project]</h2>
+        <p class="proto-text">A short description of what the contribution did — the problem it solved and the impact. Replace with your own words. Link straight to the merged PR so it can be verified.</p>
+        <div class="proto-links">
+          <a href="#" class="proto-link" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            View PR <span class="arr">→</span>
+          </a>
+        </div>
+        <div class="proto-footer">
+          <span class="proto-date">May 2025</span>
+          <span class="proto-sep">|</span>
+          <span class="proto-tag">Contribution</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<footer class="footer">
+  © 2026 <a href="index.html">isidd.dev</a> · Siddharth Singh · <a href="https://bitslyf.com" target="_blank">Engineering &amp; Lab</a>
+</footer>
+
+<script>
+  const btn = document.getElementById('themeBtn');
+  const moon = document.getElementById('iconMoon');
+  const sun = document.getElementById('iconSun');
+  const html = document.documentElement;
+  const saved = localStorage.getItem('ss-theme') || 'light';
+  applyTheme(saved);
+  btn.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    applyTheme(next);
+    localStorage.setItem('ss-theme', next);
+  });
+  function applyTheme(t) {
+    html.setAttribute('data-theme', t);
+    moon.style.display = t === 'light' ? 'inline' : 'none';
+    sun.style.display  = t === 'light' ? 'none'  : 'inline';
+  }
+</script>
+</body>
+</html>
