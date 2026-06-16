@@ -1,329 +1,323 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" dir="auto" data-theme="light">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Current Developments — Siddharth Singh</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <style>
-  :root[data-theme="dark"] {
-    --bg:        #111110;
-    --bg2:       #1A1A18;
-    --bg3:       #222220;
-    --ink:       #E8E8E3;
-    --ink2:      #9A9A92;
-    --ink3:      #5A5A54;
-    --border:    rgba(255,255,255,0.07);
-    --border2:   rgba(255,255,255,0.11);
-    --pill-bg:   rgba(255,255,255,0.06);
-    --pill-hover:rgba(255,255,255,0.10);
+  :root {
+    --gap: 24px;
+    --nav-width: 1024px;
+    --main-width: 720px;
+    --header-height: 60px;
+    --footer-height: 60px;
+    --radius: 8px;
+    --building: #d98324;
+    --shipped: #3a9b54;
   }
   :root[data-theme="light"] {
-    --bg:        #F5F4F0;
-    --bg2:       #EEECEA;
-    --bg3:       #E5E3DF;
-    --ink:       #1A1A18;
-    --ink2:      #6A6A62;
-    --ink3:      #AAAAAA;
-    --border:    rgba(0,0,0,0.08);
-    --border2:   rgba(0,0,0,0.13);
-    --pill-bg:   rgba(0,0,0,0.05);
-    --pill-hover:rgba(0,0,0,0.09);
+    --theme: #ffffff;
+    --entry: #ffffff;
+    --primary: rgb(30, 30, 30);
+    --secondary: rgb(108, 108, 108);
+    --tertiary: rgb(214, 214, 214);
+    --content: rgb(31, 31, 31);
+    --code-bg: rgb(245, 245, 245);
+    --border: rgb(238, 238, 238);
+    --tag-bg: rgb(243, 243, 243);
+  }
+  :root[data-theme="dark"] {
+    --theme: rgb(29, 30, 32);
+    --entry: rgb(46, 46, 51);
+    --primary: rgb(218, 218, 219);
+    --secondary: rgb(155, 156, 157);
+    --tertiary: rgb(65, 66, 68);
+    --content: rgb(196, 196, 197);
+    --code-bg: rgb(55, 56, 62);
+    --border: rgb(51, 51, 51);
+    --tag-bg: rgb(46, 46, 51);
   }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
+  a { text-decoration: none; }
 
   body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Inter', sans-serif;
-    font-size: 15px;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 18px;
     line-height: 1.6;
-    min-height: 100vh;
-    transition: background 0.3s, color 0.3s;
-    -webkit-font-smoothing: antialiased;
+    word-break: break-word;
+    background: var(--theme);
+    color: var(--primary);
+    transition: background 0.2s, color 0.2s;
   }
 
-  /* ── TOPBAR ── */
-  .topbar {
-    width: 100%;
-    padding: 20px 36px;
+  .nav {
     display: flex;
-    align-items: center;
+    flex-wrap: nowrap;
     justify-content: space-between;
-    border-bottom: 1px solid var(--border);
+    align-items: center;
+    max-width: calc(var(--nav-width) + var(--gap) * 2);
+    margin-inline: auto;
+    line-height: var(--header-height);
+    padding: 0 var(--gap);
   }
+  header { margin-bottom: 16px; }
+
   .back {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    color: var(--ink3);
-    text-decoration: none;
+    font-size: 14px;
+    color: var(--secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s;
+    white-space: nowrap;
+  }
+  .back:hover { color: var(--primary); }
+
+  .theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 10px;
     display: flex;
     align-items: center;
-    gap: 7px;
-    transition: color 0.2s;
+    justify-content: center;
+    height: var(--header-height);
+    line-height: 1;
+    color: var(--primary);
   }
-  .back:hover { color: var(--ink); }
+  .theme-toggle svg { height: 18px; width: 18px; fill: currentColor; display: block; }
 
-  .theme-btn {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    border: 1px solid var(--border2);
-    background: transparent;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--ink3);
-    transition: all 0.2s;
-  }
-  .theme-btn:hover { color: var(--ink); background: var(--pill-bg); }
-  .theme-btn svg { width: 14px; height: 14px; }
-
-  /* ── LAYOUT ── */
-  main {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 56px 28px 120px;
+  main.main {
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+    margin-inline: auto;
+    padding: 0 var(--gap);
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
   }
 
   /* ── PAGE HEADER ── */
   .page-header {
-    margin-bottom: 52px;
-    padding-bottom: 28px;
+    padding: 12px 0 16px;
     border-bottom: 1px solid var(--border);
+    margin-bottom: 22px;
   }
-
-  .page-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 10.5px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink3);
-    margin-bottom: 12px;
-  }
-
   .page-title {
-    font-family: 'Lora', serif;
-    font-size: clamp(28px, 5vw, 38px);
-    font-weight: 600;
-    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 30px;
+    font-weight: 700;
     letter-spacing: -0.02em;
-    line-height: 1.15;
-    margin-bottom: 14px;
+    line-height: 1.12;
+    color: var(--primary);
+    margin: 0 0 8px;
+  }
+  .page-desc {
+    font-size: 14.5px;
+    color: var(--secondary);
+    margin: 0;
+    line-height: 1.55;
   }
 
-  .page-meta {
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    color: var(--ink3);
+  /* ── DEV LIST ── */
+  .dev-list { display: flex; flex-direction: column; gap: 14px; padding-bottom: 110px; }
+
+  .dev {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 22px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .dev:hover {
+    border-color: var(--tertiary);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
   }
 
-  /* ── SECTION ── */
-  .block {
-    margin-bottom: 36px;
+  /* status row with blinking dot */
+  .dev-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 6px;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .dot.building { background: var(--building); animation: pulse-orange 1.8s ease-in-out infinite; }
+  .dot.shipped  { background: var(--shipped);  animation: pulse-green 2.4s ease-in-out infinite; }
+
+  @keyframes pulse-orange {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(217,131,36,0.4); }
+    50% { opacity: 0.55; box-shadow: 0 0 0 4px rgba(217,131,36,0); }
+  }
+  @keyframes pulse-green {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(58,155,84,0.4); }
+    50% { opacity: 0.6; box-shadow: 0 0 0 4px rgba(58,155,84,0); }
   }
 
-  .block-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 10.5px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink);
-    margin-bottom: 10px;
-  }
-
-  .block-text {
-    font-family: 'Lora', serif;
-    font-size: 16px;
-    font-weight: 400;
-    color: var(--ink2);
-    line-height: 1.75;
-    max-width: 600px;
-  }
-
-  .block-text strong {
-    color: var(--ink);
-    font-weight: 600;
-  }
-
-  /* ── DIVIDER ── */
-  .divider {
-    height: 1px;
-    background: var(--border);
-    margin: 56px 0;
-  }
-
-  /* ── LOG ── */
-  .log-header {
-    margin-bottom: 28px;
-  }
-
-  .log-title {
-    font-family: 'Lora', serif;
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-    margin-bottom: 8px;
-  }
-
-  .log-desc {
-    font-family: 'Lora', serif;
-    font-size: 15px;
-    color: var(--ink3);
-    line-height: 1.6;
-  }
-
-  .log-entry {
-    display: grid;
-    grid-template-columns: 90px 110px 1fr;
-    gap: 0 20px;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--border);
-    align-items: start;
-  }
-  .log-entry:first-child { border-top: 1px solid var(--border); }
-
-  .log-date {
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    color: var(--ink3);
-    padding-top: 2px;
-  }
-
-  .log-cat {
-    font-family: 'Inter', sans-serif;
+  .status-label {
     font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    color: var(--ink3);
-    padding-top: 2px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .status-label.building { color: var(--building); }
+  .status-label.shipped  { color: var(--shipped); }
+
+  .dev-date {
+    font-size: 12.5px;
+    color: var(--secondary);
+    margin-left: auto;
   }
 
-  .log-text {
-    font-family: 'Lora', serif;
-    font-size: 15px;
-    font-weight: 400;
-    color: var(--ink2);
-    line-height: 1.65;
+  .dev-title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.3;
+    margin: 0 0 7px;
   }
+  .dev-text {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--content);
+    margin: 0;
+  }
+  .dev-text strong { color: var(--primary); font-weight: 600; }
 
-  .log-empty {
-    font-family: 'Lora', serif;
-    font-size: 15px;
-    color: var(--ink3);
-    padding: 24px 0;
+  /* links (shown on shipped) */
+  .dev-links {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 12px;
+    padding-top: 12px;
     border-top: 1px solid var(--border);
   }
-
-  /* ── MOBILE ── */
-  @media (max-width: 580px) {
-    .topbar { padding: 16px 20px; }
-    main { padding: 36px 20px 80px; }
-    .log-entry { grid-template-columns: 1fr; gap: 4px 0; }
-    .log-date, .log-cat { padding-top: 0; }
+  .dev-link {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
   }
+  .dev-link .arr { transition: transform 0.15s; display: inline-block; }
+  .dev-link:hover { color: var(--secondary); }
+  .dev-link:hover .arr { transform: translateX(3px); }
 
-  ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+  footer.footer {
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+    margin-inline: auto;
+    padding: 24px var(--gap);
+    font-size: 13px;
+    color: var(--secondary);
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  footer.footer a { color: var(--secondary); border-bottom: 1px solid var(--tertiary); }
+  footer.footer a:hover { color: var(--primary); }
+
+  @media (max-width: 768px) {
+    .nav { padding: 0 16px; line-height: 48px; }
+    .theme-toggle { height: 48px; }
+    .back { font-size: 13px; }
+    main.main { padding: 0 16px; }
+    .page-header { padding: 10px 0 12px; margin-bottom: 18px; }
+    .page-title { font-size: 25px; }
+    .page-desc { font-size: 13.5px; }
+    .dev-list { gap: 10px; }
+    .dev { padding: 14px 16px; }
+    .dev-title { font-size: 17px; }
+    .dev-text { font-size: 15px; }
+    .dev-links { gap: 14px; }
+    body { font-size: 16px; }
+  }
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <a href="index.html" class="back">← Siddharth Singh</a>
-  <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
-    <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    <svg id="iconSun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-  </button>
-</div>
+<header>
+  <nav class="nav">
+    <a href="index.html" class="back">← Siddharth Singh</a>
+    <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme">
+      <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg id="iconSun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </nav>
+</header>
 
-<main>
+<main class="main">
 
-  <!-- HEADER -->
   <div class="page-header">
-    <p class="page-label">Updated every two weeks</p>
     <h1 class="page-title">Current Developments</h1>
-    <p class="page-meta">Last updated — June 2025</p>
+    <p class="page-desc">What I'm building right now and what's shipped. Live status, newest first.</p>
   </div>
 
-  <!-- 01 UPDATES -->
-  <div class="block">
-    <p class="block-label">Updates</p>
-    <p class="block-text">Bitslyf is now the umbrella under which all four systems — Alphaneurals, Viastora, Metauxo, and Aretenex — are being designed and documented. The portfolio at isidd.dev has moved from placeholder content to reflecting the real architecture of this work.</p>
+  <div class="dev-list">
+
+    <!-- ═══ NEWEST ENTRY GOES AT THE TOP — copy a block and paste it right below this line ═══ -->
+
+    <!-- ───── BUILDING entry (orange blinking dot, no links yet) ───── -->
+    <div class="dev">
+      <div class="dev-status">
+        <span class="dot building"></span>
+        <span class="status-label building">Building</span>
+        <span class="dev-date">June 2025</span>
+      </div>
+      <h2 class="dev-title">Myelin v2.0 — latency optimization</h2>
+      <p class="dev-text">Write at least three lines on what you're actively building right now. Describe what you're changing, why it matters, and where you currently are with it. Replace this with your own words — present tense, this is live work in progress.</p>
+    </div>
+
+    <!-- ───── SHIPPED entry (green blinking dot, with links) ───── -->
+    <div class="dev">
+      <div class="dev-status">
+        <span class="dot shipped"></span>
+        <span class="status-label shipped">Shipped</span>
+        <span class="dev-date">May 2025</span>
+      </div>
+      <h2 class="dev-title">Myelin v1.0 — storage intelligence layer</h2>
+      <p class="dev-text">Write at least three lines on what you shipped. What it does now, what changed from before, and the result. Replace this with your own words. Once shipped, add the links below so a recruiter can study the actual work in depth.</p>
+      <div class="dev-links">
+        <a href="prototypes-contributions.html" class="dev-link">Prototype <span class="arr">→</span></a>
+        <a href="projects-architecture.html" class="dev-link">Architecture <span class="arr">→</span></a>
+        <a href="engineering-playbook.html" class="dev-link">Playbook <span class="arr">→</span></a>
+      </div>
+    </div>
+
   </div>
-
-  <!-- 02 BUILDING -->
-  <div class="block">
-    <p class="block-label">Building</p>
-    <p class="block-text">Alphaneurals — the context and memory layer. Current focus is the retrieval pipeline: chunking strategy, hybrid dense and sparse search, and a reranking step. The open problem right now is recall on multi-hop queries, where single-pass retrieval misses information split across documents.</p>
-  </div>
-
-  <!-- 03 LEARNINGS -->
-  <div class="block">
-    <p class="block-label">Learnings</p>
-    <p class="block-text">Spent this cycle on attention mechanics — specifically why the scaling factor in scaled dot-product attention exists. <strong>It is not an arbitrary normalization</strong>: without it, dot product variance grows with dimension, pushing softmax into a saturated regime and killing gradients. The fix is structural, not cosmetic.</p>
-  </div>
-
-  <!-- 04 KEY INSIGHTS -->
-  <div class="block">
-    <p class="block-label">Key Insight</p>
-    <p class="block-text">Retrieval quality is the ceiling on generation quality. A strong model given weak context produces confident, wrong answers — and from the outside, that failure looks like a model problem. <strong>Most "model problems" in production systems are retrieval problems wearing a model's name.</strong></p>
-  </div>
-
-  <!-- 05 SHIPPED -->
-  <div class="block">
-    <p class="block-label">Recently Shipped</p>
-    <p class="block-text">First end-to-end retrieval and generation pipeline for Alphaneurals, running against a local document set. <strong>p99 latency under 140ms</strong> at the current corpus size — the baseline this build will be measured against going forward.</p>
-  </div>
-
-  <!-- 06 NEXT -->
-  <div class="block">
-    <p class="block-label">Next</p>
-    <p class="block-text">Build an evaluation set for the retrieval pipeline — a fixed list of queries with known-correct sources, so future changes to chunking or reranking can be measured against a baseline rather than judged by feel.</p>
-  </div>
-
-  <!-- 07 CURRENT THOUGHT -->
-  <div class="block">
-    <p class="block-label">Current Thought</p>
-    <p class="block-text">The gap between a model that works in a notebook and a system that works in production is mostly retrieval, latency, and evaluation — not the model itself. That gap is what this work is focused on closing, one layer at a time.</p>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- LOG -->
-  <div class="log-header">
-    <p class="log-title">Log</p>
-    <p class="log-desc">A record of what the seven sections above used to say, kept here as they are replaced.</p>
-  </div>
-
-  <div class="log-empty">No entries yet — the log begins with the next update cycle.</div>
 
 </main>
+
+<footer class="footer">
+  © 2026 <a href="index.html">isidd.dev</a> · Siddharth Singh · <a href="https://bitslyf.com" target="_blank">Engineering &amp; Lab</a>
+</footer>
 
 <script>
   const btn = document.getElementById('themeBtn');
   const moon = document.getElementById('iconMoon');
   const sun = document.getElementById('iconSun');
   const html = document.documentElement;
-
-  const saved = localStorage.getItem('ss-theme') || 'dark';
+  const saved = localStorage.getItem('ss-theme') || 'light';
   applyTheme(saved);
-
   btn.addEventListener('click', () => {
-    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     applyTheme(next);
     localStorage.setItem('ss-theme', next);
   });
-
   function applyTheme(t) {
     html.setAttribute('data-theme', t);
-    moon.style.display = t === 'dark' ? 'block' : 'none';
-    sun.style.display  = t === 'dark' ? 'none'  : 'block';
+    moon.style.display = t === 'light' ? 'inline' : 'none';
+    sun.style.display  = t === 'light' ? 'none'  : 'inline';
   }
 </script>
 </body>
